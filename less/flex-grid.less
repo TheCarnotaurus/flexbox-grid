@@ -1,0 +1,104 @@
+@import "variables.less";
+@import "mixins.less";
+
+.flex {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .flex-cell {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+  }
+  
+  .flex-cell--square {
+  
+    &:before {
+      content:'';
+      float:left;
+      padding-top:100%;
+    }
+  }
+  
+  .flex--flexCells > .flex-cell {
+    display: -webkit-flex;
+    display: flex;
+  }
+  
+  .flex--top {
+    align-items: flex-start;
+  }
+  
+  .flex--bottom {
+    align-items: flex-end;
+  }
+  
+  .flex--center {
+    align-items: center;
+  }
+  
+  .flex--justify-center {
+    justify-content: center;
+  }
+  
+  .flex--justify-right {
+    justify-content: flex-end;
+  }
+  
+  .flex--justify-left {
+    justify-content: flex-start;
+  }
+  
+  .flex-cell--top {
+    align-self: flex-start;
+  }
+  
+  .flex-cell--bottom {
+    align-self: flex-end;
+  }
+  
+  .flex-cell--center {
+    align-self: center;
+  }
+  
+  .flex-cell--autoSize {
+    flex: none;
+  }
+  
+  
+  .flex-row {
+    margin: 0 -@grid-gutter-half 0 -@grid-gutter-half;
+  
+  > .flex-cell {
+      padding: 0 @grid-gutter-half 0 @grid-gutter-half;
+    }
+  }
+  
+  [class^="cell-"], [class*=" cell-"] {
+    -webkit-flex: 0 0 100%;
+    -ms-flex: 0 0 100%;
+    position: relative;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .make-flex-grid(@grid-columns, flex, xs, @grid-gutter-half);
+  
+  @media (min-width: @screen-sm-min) {
+    .make-flex-grid(@grid-columns, flex, sm, @grid-gutter-half);
+  }
+  
+  @media (min-width: @screen-md-min) {
+    .make-flex-grid(@grid-columns, flex, md, @grid-gutter-half);
+  }
+  
+  @media (min-width: @screen-lg-min) {
+    .make-flex-grid(@grid-columns, flex, lg, @grid-gutter-half);
+  }

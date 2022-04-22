@@ -1,0 +1,104 @@
+.make-flex-grid(@count, @name, @breakpoint, @gutter-width) {
+    .@{name}-row {
+      margin: 0 (-@gutter-width) 0 (-@gutter-width);
+  
+      & > [class^="cell-"], 
+      & > [class*=" cell-"] {
+        padding: 0 (@gutter-width) 0 (@gutter-width);
+      }
+    }
+  
+    .make-cell(@count, @breakpoint);
+  
+    // Vertical alignment per row
+    .@{name}-@{breakpoint}--top {
+        -webkit-box-align: flex-start;
+        align-items: flex-start;
+    }
+    .@{name}-@{breakpoint}--bottom {
+        -webkit-box-align: flex-end;
+        align-items: flex-end;
+    }
+    .@{name}-@{breakpoint}--center {
+        -webkit-box-align: center;
+        align-items: center;
+    }
+  
+    // Vertical alignment per cell
+    .@{name}__cell-@{breakpoint}--top {
+        -ms-flex-item-align: flex-start;
+        align-self: flex-start;
+    }
+    .@{name}__cell-@{breakpoint}--bottom {
+        -ms-flex-item-align: flex-end;
+        align-self: flex-end;
+    }
+    .@{name}__cell-@{breakpoint}--center {
+        -ms-flex-item-align: center;
+        align-self: center;
+    }
+  
+    // Horizontal alignment per row
+    .@{name}-@{breakpoint}--justify-start {
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+    .@{name}-@{breakpoint}--justify-end {
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end;
+    }
+  
+    .@{name}-@{breakpoint}--justify-center {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+    .@{name}-@{breakpoint}--justify-space-between {
+        justify-content: space-between;
+    }
+  
+    .@{name}-@{breakpoint}--justify-space-around {
+        justify-content: space-around;
+    }
+  
+    // Horizontal alignment per cell
+    .@{name}__cell-@{breakpoint}--justify-end {
+        margin-left: auto;
+    }
+  
+    .@{name}__cell-@{breakpoint}--justify-center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .@{name}-@{breakpoint}-position-left {
+      -webkit-box-ordinal-group: 1;
+      -ms-flex-order: 0;
+      order: 0;
+    }
+  
+    .@{name}-@{breakpoint}-position-center {
+      -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+      order: 1;
+    }
+  
+    .@{name}-@{breakpoint}-position-right {
+      -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+      order: 2;
+    }
+  }
+  
+  .make-cell(@count, @breakpoint)  when (@count > 0) {
+    .cell-@{breakpoint}-@{count} {
+      -webkit-flex: 0 0 percentage((100 / @grid-columns) / 100 * @count);
+      -ms-flex: 0 0 percentage((100 / @grid-columns) / 100 * @count);
+      flex: 0 0 percentage((100 / @grid-columns) / 100 * @count);
+      max-width: percentage((100 / @grid-columns) / 100 * @count);
+    }
+  
+    .make-cell((@count - 1), @breakpoint);
+  }
